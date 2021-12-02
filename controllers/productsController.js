@@ -19,5 +19,21 @@ router.post('/', async (req, res) => {
     })
 })
 
+router.put('/:id', async (req,res) => {
+    await Product.findByIdAndUpdate({_id: req.params.id}, req.body).then(() => {
+        res.status(200).json({msg: "Produto alterado"})
+    }).catch((error) => {
+        res.status(400).json({msg: "Error:" + error})
+    })
+})
+
+router.delete('/:id', async (req, res) => {
+    await Product.findByIdAndDelete({_id: req.params.id}).then(() => {
+        res.status(200).json({msg: "Produto excluido com sucesso!"})
+    }).catch((error) => {
+        res.status(400).json({msg: "Error" + error})
+    })
+})
+
 
 module.exports = router
