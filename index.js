@@ -2,7 +2,6 @@ const express = require('express');
 const connect = require('./database/connection')
 const bodyParser = require('body-parser')
 const cors = require('cors')
-var session = require('express-session')
 
 const app = express();
 
@@ -20,12 +19,10 @@ app.use((req, res, next)=>{
 })
 app.use(cors())
 
-// Sessão
-app.use(session({ secret: 'sad33c434f24f23rc23wevrbt5y67nu6', cookie: {maxAge: 60000}}))
-
 // Rotas
 app.use('/products', require('./controllers/productsController'))
 app.use('/user', require('./controllers/userController'))
+app.use('/adress', require('./controllers/adressController'))
 
 // Inicializar o servidor
 app.listen(PORT, async ()=>{
