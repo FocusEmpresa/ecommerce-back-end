@@ -15,8 +15,11 @@ app.use((req, res, next)=>{
     next();
 })
 
+// Rotas
 app.use('/products', require('./controllers/productsController'))
+app.use('/user', require('./controllers/userController'))
 
+// Inicializar o servidor
 app.listen(PORT, async ()=>{
     await connect();
     console.log('Servidor iniciado!')
