@@ -30,17 +30,22 @@ router.post('/login', async (req, res) => {
     const user = await User.findOne({email: req.body.email})
     
     if(!user) {
-        return res.status(200).json({msg: "Usuário não existe!"})
+        return res.status(400).json("Usuário não existe!")
     } 
 
     if(cryptPassword.comparePassword(req.body.password, user.password)) {
-        return res.status(200).json({msg: "Usuário logado com sucesso!"})
+        return res.status(200).json("Usuário logado com sucesso!")
     } else {
-        return res.status(400).json({msg: "Senha inválida!"})
+        return res.status(400).json("Senha inválida!")
     }
 })
 
-// Fazer sistema de logout
+// Get user logged
+router.get('/getUser/:email', async (req, res) => {
+    const email = req.params.email
+    const user = await User.findOne({email: email})
+    return res.status(200).json({user: user})
+})
 
 
 // Alterar typeAccess do usuário no banco de dados
