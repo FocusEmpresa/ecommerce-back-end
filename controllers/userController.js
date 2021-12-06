@@ -47,6 +47,11 @@ router.get('/getUser/:email', async (req, res) => {
     return res.status(200).json({user: user})
 })
 
+router.get('/getUser',async(req,res)=>{
+    const allUser = await User.find({}).select("-password")
+    return res.status(200).json(allUser);
+})
+
 
 // Alterar typeAccess do usuário no banco de dados
 
